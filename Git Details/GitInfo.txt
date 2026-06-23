@@ -1,0 +1,14 @@
+The most ideal way to upload files and folders to github is via the Git commands. The commands are as follows-
+1. git init - this is used to initialize git in your normal folder
+
+2. git add . - this is used to add all your files to the staging area.
+
+Staging area - It is a place where if a particular file is added it can then go on to get saved in a checkpoint which is the commit.
+
+3. git commit -m "Any message" - This is like the checkpoints in a game in our case checkpoints in a project that we can go back to in case anything goes wrong. And the message is important because viewing the message will help us know what that checkpoint contains.
+
+4. git remote add origin "link to github repo/folder" - this allows our local folder to make a connection to the github servers. So that our folder is always connected to the github servers and uploading the files and the folders is very seamless(we literally have to write just one line to upload). Not just this but all the information about the checkpoints(commits) and the branches are also sent via our git to the github servers when we make a connection like this.
+
+5. git push origin (branch name) - This is the code that helps us upload a particular commit or checkpoint to a particular branch.
+
+Branch - Branches are like parts of the same project that is being done by different persons. The concept of branches came so that different persons are able to work on the same project but on different features.
