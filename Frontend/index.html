@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-         button {
+      button {
         border-radius: 8px;
         background-color: rgb(0, 98, 255);
         height: 50px;
@@ -15,17 +15,52 @@
         font-weight: bolder;
         cursor: pointer;
         margin: 20px;
-      } 
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <center>
-    Username <input type="text">
-    <br><br>
-    Password <input type="text">
-    <br><br><br>
-    <button>Sign Up</button>
-    <button>Sign In</button>
+      Username <input id="username" type="text" /> <br /><br />
+      Password <input id="password" type="text" /> <br /><br /><br />
+      <button onclick="signUp()">Sign Up</button>
+      <button onclick="signIn()">Sign In</button>
     </center>
-</body>
+
+    <script>
+            function signUp(){
+                   var username = document.getElementById("username").value
+                   var password = document.getElementById("password").value
+                   var jsonData = {
+                    "user" : username,
+                    "pass" : password
+                   }
+                   fetch("/signUp",
+                    {
+                     "method": 'POST',
+                     "headers":
+                     {
+                        "Content-Type":"application/json",
+                     },
+                      "body": JSON.stringify(jsonData)
+                    })
+            }
+            function signIn(){
+                   var username = document.getElementById("username").value
+                   var password = document.getElementById("password").value
+                   var jsonData = {
+                    "user" : username,
+                    "pass" : password
+                   }
+                   fetch("/signIn",
+                    {
+                     "method": 'POST',
+                     "headers":
+                     {
+                        "Content-Type":"application/json",
+                     },
+                      "body": JSON.stringify(jsonData)
+                    })
+            }
+    </script>
+  </body>
 </html>
