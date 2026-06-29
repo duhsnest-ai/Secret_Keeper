@@ -1,4 +1,7 @@
 const express = require("express")
+const secretsDbPath = "../Database/secrets.json"
+const usersDbPath = "../Database/users.json"
+const fs = require("fs")
 
 const app = express()
 
@@ -16,6 +19,12 @@ app.post("/signUp", function(request, response){
     var username = request.body.user
     var password = request.body.pass
     //store in a DB
+    // 1. first we need to read the data to actually get the data
+    // 2. And in the next step we can then edit the data and put it back in our file 
+    var usersFile = fs.readFileSync(usersDbPath,"utf-8")
+    var usersObject = JSON.parse(usersFile)
+    usersObject[username] = password
+    fs.writeFileSync(usersDbPath, JSON.stringify(usersObject), "utf-8")
 })
 
 app.post("/signIn", function(request, response){
