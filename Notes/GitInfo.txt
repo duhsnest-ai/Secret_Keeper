@@ -12,3 +12,9 @@ Staging area - It is a place where if a particular file is added it can then go 
 5. git push origin (branch name) - This is the code that helps us upload a particular commit or checkpoint to a particular branch.
 
 Branch - Branches are like parts of the same project that is being done by different persons. The concept of branches came so that different persons are able to work on the same project but on different features.
+
+6. git stash - This is more like an undo button where we are going back to the last saved state or you can say commit.
+
+7. git pull origin (branch name) - This downloads all the contents from the github folder into our folder. We do this to make sure that the contents in our folder is matched with the one that's uploaded on Github.
+
+8. git checkout (branch name) - This command helps us to move from one branch to the other branch.
