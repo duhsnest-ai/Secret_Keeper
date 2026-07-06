@@ -72,12 +72,23 @@ app.post("/submit", function(request, response){
     else{
         secretsObject[username] = [secret, age]
     }
+    fs.writeFileSync(secretsDbPath, JSON.stringify(secretsObject))
     response.send("Successfully saved")
 })
 
 app.get("/secret", function(request, response){
     // We will send response and the response will be the secret and the age.
     //First actually it will receive the username from the frontend and only then it can search for the secret and the age.
+    var username = request.query.username
+    var secretsFile = fs.readFileSync(secretsDbPath,"utf-8")
+    var secretsObject = JSON.parse(secretsFile)
+    var info = secretsObject[username]
+    var secret = info[0]
+    var age = info[1]
+    response.json({
+        "secret" : secret,
+        "age" : age
+    })
 })
 
 app.listen(80, function(){

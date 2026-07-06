@@ -27,14 +27,14 @@
     </center>
 
     <script>
-            function signUp(){
+            async function signUp(){
                    var username = document.getElementById("username").value
                    var password = document.getElementById("password").value
                    var jsonData = {
                     "user" : username,
                     "pass" : password
                    }
-                   fetch("/signUp",
+                   var response = await fetch("/signUp",
                     {
                      "method": 'POST',
                      "headers":
@@ -43,15 +43,18 @@
                      },
                       "body": JSON.stringify(jsonData)
                     })
+                    var responseText = await response.text()
+                    alert(responseText)
+
             }
-            function signIn(){
+            async function signIn(){
                    var username = document.getElementById("username").value
                    var password = document.getElementById("password").value
                    var jsonData = {
                     "user" : username,
                     "pass" : password
                    }
-                   fetch("/signIn",
+                   var response = await fetch("/signIn",
                     {
                      "method": 'POST',
                      "headers":
@@ -60,6 +63,13 @@
                      },
                       "body": JSON.stringify(jsonData)
                     })
+                    var finalResult = await response.text()
+                    if(finalResult == "Successful login"){
+                      window.location.href = "/secretDetails"
+                    }
+                    else{
+                      alert(finalResult)
+                    }
             }
     </script>
   </body>
