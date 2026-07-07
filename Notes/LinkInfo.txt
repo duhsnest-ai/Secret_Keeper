@@ -1,0 +1,5 @@
+Parts of a link/url-
+a. Visible parts of a link
+base_url(domain)+portNumber+routes/endpoints+query(optional)
+b. There are parts of a link that are not visible in the url and they are-
+methods, headers - content-type and authentication, body(only post request has a body)

@@ -65,7 +65,17 @@
                     })
                     var finalResult = await response.text()
                     if(finalResult == "Successful login"){
-                      window.location.href = "/secretDetails"
+                      localStorage.setItem("username", username)
+                      // window.location.href = "/secretDetails"
+                      var response = await fetch("/secretDetails",
+                        {
+                          headers : {
+                            authentication : username + " " + password
+                          }
+                        }
+                      )
+                      var textReponse = await response.text()
+                      
                     }
                     else{
                       alert(finalResult)

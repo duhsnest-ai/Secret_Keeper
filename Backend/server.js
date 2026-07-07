@@ -11,9 +11,37 @@ app.get("/", function(request, response){
     response.sendFile("C:/Users/mihir/OneDrive/Desktop/Classes/Duke Backend Classes/Secret Keeper/Frontend/index.html")
 })
 
-app.get("/secretDetails", function(request, response){
-    response.sendFile("C:/Users/mihir/OneDrive/Desktop/Classes/Duke Backend Classes/Secret Keeper/Frontend/secretDetails.html")
-})
+app.get(
+    // 1st parameter
+    "/secretDetails", 
+    
+    // 2nd parameter
+    //middleware function
+    function(request, response, next){
+        var username = request.headers.authorization.split(" ")[0]
+        var password = request.headers.authorization.split(" ")[1]
+        //we need to check if this username and password is already there in the Database.
+        var usersFile = fs.readFileSync(usersDbPath,"utf-8")
+        var usersObject = JSON.parse(usersFile)
+        if(username in usersObject){
+            var value = usersObject[username]
+            if(value == password){
+                next()
+            }
+            else{
+                response.send("The password did not match")
+            }
+        }
+        else{
+            response.send("User does not exist")
+        }
+    }, 
+
+    // 3rd parameter
+    // Actual function
+    function(request, response){
+        response.sendFile("C:/Users/mihir/OneDrive/Desktop/Classes/Duke Backend Classes/Secret Keeper/Frontend/secretDetails.html")
+    })
 
 app.post("/signUp", function(request, response){
     var username = request.body.user
@@ -94,3 +122,5 @@ app.get("/secret", function(request, response){
 app.listen(80, function(){
     console.log("The server has started")
 })
+
+// Middlewares - Middlewares are functions that stop u in the middle so that u are able to go to the next step only after you are authenticated.
