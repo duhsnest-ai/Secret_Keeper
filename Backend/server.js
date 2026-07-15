@@ -20,6 +20,8 @@ app.get(
     function(request, response, next){
         var username = request.headers.authorization.split(" ")[0]
         var password = request.headers.authorization.split(" ")[1]
+        console.log(username)
+        console.log(password)
         //we need to check if this username and password is already there in the Database.
         var usersFile = fs.readFileSync(usersDbPath,"utf-8")
         var usersObject = JSON.parse(usersFile)
@@ -29,11 +31,11 @@ app.get(
                 next()
             }
             else{
-                response.send("The password did not match")
+                response.error("The password did not match")
             }
         }
         else{
-            response.send("User does not exist")
+            response.error("User does not exist")
         }
     }, 
 
@@ -46,6 +48,9 @@ app.get(
 app.post("/signUp", function(request, response){
     var username = request.body.user
     var password = request.body.pass
+    if(username == null || password == null || username == "" || password == ""){
+        response.send("Username or password cannot be empty")
+    }
     //store in a DB
     // 1. first we need to read the data to actually get the data
     // 2. And in the next step we can then edit the data and put it back in our file 
@@ -89,6 +94,9 @@ app.post("/submit", function(request, response){
     var username = request.body.username
     var age = request.body.age
     var secret = request.body.secret
+    if(username == null || age == null || secret == null || username == "" || age == "" || secret == ""){
+        response.send("The username, the age or the secret cannot be empty")
+    }
     //The first step is finding the username in our database
     //The second step is storing the age and the secret wrt the username
     var secretsFile = fs.readFileSync(secretsDbPath,"utf-8")
@@ -124,3 +132,5 @@ app.listen(80, function(){
 })
 
 // Middlewares - Middlewares are functions that stop u in the middle so that u are able to go to the next step only after you are authenticated.
+
+//We need to make sure that null values are not entered in the database

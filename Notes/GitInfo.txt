@@ -18,3 +18,11 @@ Branch - Branches are like parts of the same project that is being done by diffe
 7. git pull origin (branch name) - This downloads all the contents from the github folder into our folder. We do this to make sure that the contents in our folder is matched with the one that's uploaded on Github.
 
 8. git checkout (branch name) - This command helps us to move from one branch to the other branch.
+
+How to merge branches?
+- Do a git pull of the foreign branch that u want to merge.
+- Then we write git merge (name of the branch) while staying in our own branch.
+
+The branch we are staying in will now have the changes of the branch that we wrote after git merge.
+
+- After the git merge is done we do a git push origin (name of the branch we are in)

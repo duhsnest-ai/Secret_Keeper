@@ -70,11 +70,11 @@
                       var response = await fetch("/secretDetails",
                         {
                           headers : {
-                            authentication : username + " " + password
+                            authorization : username + " " + password
                           }
                         }
                       )
-                      var textReponse = await response.text()
+                      var statusCode = await response.status                    
                       
                     }
                     else{
