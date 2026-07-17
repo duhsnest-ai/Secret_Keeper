@@ -24,6 +24,9 @@
       Password <input id="password" type="text" /> <br /><br /><br />
       <button onclick="signUp()">Sign Up</button>
       <button onclick="signIn()">Sign In</button>
+
+      <br><br>
+      <input type="checkbox" id="rememberDevice"> Keep me signed in
     </center>
 
     <script>
@@ -48,6 +51,8 @@
 
             }
             async function signIn(){
+                   var checkBox = document.getElementById("rememberDevice").checked
+                   //we store the value of the username and the password inside the cookies or the local storage
                    var username = document.getElementById("username").value
                    var password = document.getElementById("password").value
                    var jsonData = {

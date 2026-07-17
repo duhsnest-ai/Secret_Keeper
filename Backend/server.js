@@ -2,6 +2,7 @@ const express = require("express")
 const secretsDbPath = "../Database/secrets.json"
 const usersDbPath = "../Database/users.json"
 const fs = require("fs")
+const bcrypt = require("bcryptjs")
 
 const app = express()
 
@@ -27,7 +28,7 @@ app.get(
         var usersObject = JSON.parse(usersFile)
         if(username in usersObject){
             var value = usersObject[username]
-            if(value == password){
+            if(bcrypt.compareSync(password, value) == true){
                 next()
             }
             else{
@@ -63,7 +64,9 @@ app.post("/signUp", function(request, response){
         response.send("Username is already taken")
     }
     else{
-        usersObject[username] = password
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(password, salt);
+        usersObject[username] = hash
         fs.writeFileSync(usersDbPath, JSON.stringify(usersObject), "utf-8")
         response.send("The account has been successfully created")
     }
@@ -78,7 +81,7 @@ app.post("/signIn", function(request, response){
     var usersObject = JSON.parse(usersFile)
     if(username in usersObject){
         var value = usersObject[username]
-        if(value == password){
+        if(bcrypt.compareSync(password, value) == true){
             response.send("Successful login")
         }
         else{

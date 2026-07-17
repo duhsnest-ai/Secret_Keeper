@@ -1,0 +1,2 @@
+1. We do cd ../ in the terminal whenever we need to go back one folder.
+2. To run any command in git or npm install any module we need to first go to the main folder of our project.
